@@ -1,0 +1,41 @@
+body
+{
+	margin: 50px 100px 50px 100px;
+}
+
+#body
+{
+	margin: 20px 20px 20px 20px;
+}
+
+#quote-area
+{
+	border-style: solid;
+	border-color: grey;
+	margin-bottom: 5px;
+	border-radius: 10px;
+}
+
+#twitter-symbol
+{
+	color: black;
+}
+
+#refresh-button
+{
+	color:black;
+}
+
+#quote, #author
+{
+	font-family: monospace;
+	font-style: italic;
+}
+
+#mark
+{
+	font-family: monospace;
+	font-style: italic;
+	color: blue;
+}
+

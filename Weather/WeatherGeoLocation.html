@@ -1,0 +1,166 @@
+<!Doctype html>
+<html>
+
+<head>
+	<title>LOCAL WEATHER</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="styling.css">
+	
+	<!-- script area-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	
+	<script>
+		var latitude, longitude, apiLink,apiKey, unit, temperature, changingUnit, minutes, hours;
+		//set api link to weather api
+		apiLink = "http:\\api.openweathermap.org/data/2.5/weather?";
+		apiKey="98b24935f3ef7c758917bf253f64b5fa";
+		
+		// set html tags to appropriate values
+		setValues = function(jsonObject)
+		{
+			//location
+			$("#location").html('<h3 class="text-center">' + jsonObject.name + '</h3>');
+			
+			//temperature
+			temperature = jsonObject.main.temp;
+			temperature= Math.floor(temperature);
+			$("#temperature").html('<h3 class="text-center">' + temperature + '°<span title="Click to change units" id="temperature-unit">C</span></h3>');
+			
+			//date
+			var currentDate = new Date();
+			minutes = currentDate.getMinutes();
+			hours=currentDate.getHours() ;
+			if(minutes < 10)
+			{
+				minutes = "0"+ minutes;
+			}
+			$("#time").html('<h3 class="text-center">' + hours+ ":" + minutes + '</h3>');
+			
+			//weather icon
+			var icon= jsonObject.weather[0].icon;
+			$("#weather-icon").html('<img src="http://openweathermap.org/img/w/'+icon+'.png" alt="icon" width="100" height="100" >');
+			
+			//weather description
+			var weatherDescription=jsonObject.weather[0].description;
+			var arraySplit=weatherDescription.split("");
+			arraySplit[0] = arraySplit[0].toUpperCase();
+			weatherDescription= arraySplit.join("");
+			$("#description").html('<h3 class="text-center">' + weatherDescription +'</h3>');
+			
+			//time show moon if its night and sun if it's day
+			if(currentDate.getHours() > 20)
+			{
+				$("#time-icon").html('<i class="fa fa-moon-o fa-3x">');
+			}
+			
+			else
+			{
+				$("#time-icon").html('<i class="fa fa-sun-o fa-3x">');
+			}
+			
+		}
+		
+		function getWeather()
+		{
+			
+			var options = {
+			  enableHighAccuracy: true, 
+			  maximumAge        : 300000000, 
+			  timeout           : 27000
+			};
+
+			//call geo location api
+			navigator.geolocation.getCurrentPosition(success, error, options);
+			
+			//use success value to generate coordinates
+			function success(pos)
+			{
+				latitude = pos.coords.latitude;
+				longitude = pos.coords.longitude;
+				unit ="metric"
+				changingUnit=unit;
+				
+				// set apilink to correct values using coordinates and correct units
+				apiLink = apiLink + "lat="+ latitude+"&lon=" +longitude +"&APPID=" +apiKey+"&units="+unit;
+				
+				//get json for the link
+				$.getJSON(apiLink,function(json)
+					{
+						setValues(json);
+					}
+				);
+			}
+			
+			
+				function error()
+			{
+				window.alert("No Location")
+			}
+		}
+		
+		
+		$(document).ready(function()
+		{
+			getWeather();
+			
+			//change background color and text color based on time
+			
+			if(hours > 20)
+			{
+				$("body").css('background-color','black');
+				$("body").css('color','white');
+			}
+			
+			else
+			{
+				$("body").css('background-color','#87CEEB');
+				$("body").css('color','white');
+			}
+			
+			//if the temperature value is clicked
+			$("#temperature").on("click", function()
+				{
+					//if it is celsius
+					if(changingUnit==="metric")
+					{
+						// convert temperature to farhenheit
+						temperature = (temperature * 1.8) + 32;
+						temperature= Math.floor(temperature);
+						$("#temperature").html('<h3 class="text-center">' + temperature + '°<span title="Click to change units" id="temperature-unit">F</span></h3>');
+						changingUnit="imperial";
+					}
+					
+					else if(changingUnit==="imperial")
+					{
+						// convert temperature to celsius
+						temperature = (temperature - 32) / 1.8;
+						temperature= Math.floor(temperature);
+						$("#temperature").html('<h3 class="text-center">' + temperature + '°<span title="Click to change units" id="temperature-unit">C</span></h3>');
+						changingUnit="metric";
+					}
+				}
+			);
+		});
+	</script>
+</head>
+
+<body class="container-fluid">
+	<div class="row" id="content">
+		<!-- Title -->
+		<p><h2 class="text-center" id="page-title">  WEATHER REPORT </h2></p>
+		<!-- Information-->
+		<div class="row">
+			<p id="location"></p>
+			<p id="temperature"></p>
+			<p id="weather-icon"></p>
+			<p id="description"> </p>
+			<p id="time"></p>
+			<p class="text-center" id="time-icon"></p>
+		</div>
+	</div>
+	
+</body>
+
+</html>

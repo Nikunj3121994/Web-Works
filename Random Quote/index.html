@@ -1,0 +1,106 @@
+<!Doctype html>
+<html>
+	<head>
+		<title> RANDOM QUOTE </title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+		integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="styling.css">
+		
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		
+		<script>
+			var quote,author,quotesList=[], random, twitterApi, twitterLink,html="";
+			quotesList= [
+				{"quote":"Great minds discuss ideas; average minds discuss events; small minds discuss people", "author":"Eleanor Roosevelt"},
+				{"quote":"To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment", "author":"Ralph Waldo Emerson"},
+				{"quote":"After climbing a great hill, one only finds that there are many more hills to climb", "author":"Nelson Mandela"},
+				{"quote":"Great things are done by a series of small things brought together", "author":"Vincent Van Gogh"},
+				{"quote":"The greatest weapon against stress is our ability to choose one thought over another", "author":"William James"},
+				{"quote":"All the great things are simple, and many can be expressed in a single word: freedom, justice, honor, duty, mercy, hope", "author":"Winston Churchill"},
+				{"quote":"The greatest way to live with honor in this world is to be what we pretend to be", "author":"Socrates"},
+				{"quote":"Life is either a great adventure or nothing", "author":"Helen Keller"},
+				{"quote":"Some are born great, some achieve greatness, and some have greatness thrust upon them", "author":"William Shakespeare"},
+				{"quote":"Never was anything great achieved without danger", "author":"Niccolo Machiavelli"},
+			];
+			
+			//load when document is ready
+			$(document).ready(function()
+				{
+					//genertae random number 
+					random = Math.floor(Math.random() * (11 - 1)) + 1;
+					
+					//set quote and author
+					quote = quotesList[random].quote;
+					author = quotesList[random].author;
+					
+					//set html value
+					html+= '<i class="fa fa-quote-left">' + " " + quote + " " + '<i class="fa fa-quote-right">';
+					
+					//put a random quote when the page loads
+					$("#quote").html(html);
+					$("#author").html("- "+author);
+					
+					//anytime the refesh button is clicked
+					$("#refresh-button").on("click", function()
+						{
+							// reset html string
+							html="";
+							
+							//genertae random number 
+							random = Math.floor(Math.random() * (11 - 1)) + 1;
+							
+							//set quote and author
+							quote = quotesList[random].quote;
+							author = quotesList[random].author;
+							
+							//set html part to include quote
+							html+= '<i class="fa fa-quote-left">' + " " + quote + " " + '<i class="fa fa-quote-right">';
+							
+							//put a random quote when the button is clicked
+							$("#quote").html(html);
+							$("#author").html("- "+author);
+						}
+					);
+					
+					//when the tweet button is clicked
+					$("#twitter-symbol").on("click", function()
+						{
+							twitterApi = "https://twitter.com/intent/tweet";
+							twitterLink = twitterApi+"?status="+encodeURIComponent(quote+'.');
+							window.open(twitterLink,"_blank");
+						}
+					);
+				}
+			);
+		</script>
+		
+	</head>
+	
+	<body class="container-fluid">
+		<div class="row" id="body">
+			<h1 class="text-center"> Random "QUOTE" of the day </h1>
+			<div class="row">
+				<div class="col-md-4"> </div>
+				<div class="col-md-4" id="quote-area">
+					<div >
+						<p><h3 class="text-justify" id="quote"> Quote goes here </h3></p>
+						<p><h6 class="text-right" id="author">author</h6></p>
+					</div>
+					<div class="row">
+						<div class="col-md-5">
+							 <i class=" btn fa fa-twitter fa-2x" id="twitter-symbol"> </i>
+						</div>
+						<div class="col-md-2">
+							<i class=" btn fa fa-refresh fa-3x" id="refresh-button"> </i>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4"> </div>
+			</div>
+		</div>
+		<p id="mark"><a href="http:\\twitter.com\prof_yinkular" target="_blank"><i class="fa fa-twitter">@Prof_yinkular</i></a></p>
+	</body>
+</html>

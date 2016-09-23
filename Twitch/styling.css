@@ -1,0 +1,57 @@
+#title-section
+{
+	border: solid;
+	width: 600px;
+	height: auto;
+	margin-left: 350px;
+	margin-top: 15px;
+	margin-bottom: 10px;
+}
+
+#data-section
+{
+	border: solid;
+	width: 800px;
+	height: auto;
+	margin-left: 250px;
+}
+
+#data-area
+{
+	margin: 10px 5px 10px 5px;
+}
+
+.data-container
+{
+	border: solid;
+	width: auto;
+	height: auto;
+	margin: 2px 3px 3px 3px;
+	padding-left: 10px;
+	border-radius: 30px;
+}
+
+.status-icon
+{
+	margin-right: 10px;
+}
+
+.online
+{
+	border-color: green;
+}
+
+.fa-bell-o
+{
+	color: green;
+}
+
+.game-title
+{
+	margin-left: 60px;
+}
+
+.unavailable 
+{
+	color: red;
+}

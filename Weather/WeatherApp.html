@@ -1,0 +1,162 @@
+<!--http://ip-api.com/json-->
+<!--https://www.wunderground.com/weather/api-->
+
+<!Doctype html>
+<html>
+
+<head>
+	<title>LOCAL WEATHER</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="styling.css">
+	
+	<!-- script area-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	
+	<script>
+		var latitude, longitude, apiLink,apiKey, unit, temperature, changingUnit, minutes, hours,currentDate, timeOfDay;
+		var city="", country="", locationApi="", zip;
+		
+		// set html tags to appropriate values
+		setValues = function(jsonObject)
+		{
+			//location
+			$("#location").html('<h3 class="text-center">' + jsonObject.location.city +',' + jsonObject.location.state+'</h3>');
+			
+			//temperature
+			temperature = jsonObject.current_observation.temp_c;
+			temperature= Math.floor(temperature);
+			$("#temperature").html('<h3 class="text-center">' + temperature + '°<span title="Click to change units" id="temperature-unit">C</span></h3>');
+			
+			//date
+			currentDate = new Date();
+			minutes = currentDate.getMinutes();
+			hours=currentDate.getHours() ;
+			if(minutes < 10)
+			{
+				minutes = "0"+ minutes;
+			}
+			
+			if(hours < 10)
+			{
+				hours = "0"+hours;
+			}
+			$("#time").html('<h3 class="text-center">' + hours+ ":" + minutes + '</h3>');
+			
+			//weather icon
+			var icon= jsonObject.current_observation.icon_url;
+			$("#weather-icon").html('<img src="'+icon+'" alt="icon" width="100" height="100" >');
+			
+			//weather description
+			var weatherDescription=jsonObject.current_observation.weather;
+			$("#description").html('<h3 class="text-center">' + weatherDescription +'</h3>');
+			
+			//time show moon if its night and sun if it's day
+			if(currentDate.getHours() >= 20 || currentDate.getHours() <= 5 )
+			{
+				$("#time-icon").html('<i class="fa fa-moon-o fa-3x">');
+				timeOfDay="night";
+			}
+			
+			else
+			{
+				$("#time-icon").html('<i class="fa fa-sun-o fa-3x">');
+				timeOfDay="noon";
+			}
+			
+			//change background color and text color based on time
+			if(timeOfDay==="night")
+			{
+				$("body").css('background-color','#000000');
+				$("body").css('color','white');
+			}
+			
+			else if(timeOfDay==="noon")
+			{
+				$("body").css('background-color','#87CEEB');
+				$("body").css('color','white');
+			}
+			
+		}
+		
+		function getWeather()
+		{
+			locationApi = "http://ip-api.com/json";
+			
+			$.getJSON(locationApi,passLocation);
+		   //window.alert(city);
+			
+			function passLocation(jsonObject)
+			{
+				//get latitude and longitude
+				latitude= jsonObject.lat;
+				longitude= jsonObject.lon;
+
+				unit ="metric"
+				changingUnit=unit;
+				
+				//set api link to weather api
+				apiLink = "http://api.wunderground.com/api/26f8d78c65b073b6/geolookup/conditions/q/";
+				
+				// set apilink to correct values using coordinates and correct units
+				apiLink = apiLink +latitude+","+longitude+".json";
+				
+				
+				//get json for the link
+				$.getJSON(apiLink,setValues);
+			}
+		
+		}
+		
+		
+		$(document).ready(function()
+		{
+			getWeather();
+			
+			
+			//if the temperature value is clicked
+			$("#temperature").on("click", function()
+				{
+					//if it is celsius
+					if(changingUnit==="metric")
+					{
+						// convert temperature to farhenheit
+						temperature = (temperature * 1.8) + 32;
+						temperature= Math.floor(temperature);
+						$("#temperature").html('<h3 class="text-center">' + temperature + '°<span title="Click to change units" id="temperature-unit">F</span></h3>');
+						changingUnit="imperial";
+					}
+					
+					else if(changingUnit==="imperial")
+					{
+						// convert temperature to celsius
+						temperature = (temperature - 32) / 1.8;
+						temperature= Math.floor(temperature);
+						$("#temperature").html('<h3 class="text-center">' + temperature + '°<span title="Click to change units" id="temperature-unit">C</span></h3>');
+						changingUnit="metric";
+					}
+				}
+			);
+		});
+	</script>
+</head>
+
+<body class="container-fluid">
+	<div class="row" id="content">
+		<!-- Title -->
+		<p><h2 class="text-center" id="page-title">  WEATHER REPORT </h2></p>
+		<!-- Information-->
+		<div class="row">
+			<p id="location"></p>
+			<p id="temperature"></p>
+			<p id="weather-icon"></p>
+			<p id="description"> </p>
+			<p id="time"></p>
+			<p class="text-center" id="time-icon"></p>
+		</div>
+	</div>
+	
+</body>
+
+</html>

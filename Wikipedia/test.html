@@ -1,0 +1,46 @@
+<!Doctype html>
+<html>
+
+<head>
+	<title>LOCAL WEATHER</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	
+	<!-- script area-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	
+	<script>
+		function getResults()
+		{
+			
+			var apiLink="https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=info|extracts&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch=tesla&callback=?";
+			
+			$.getJSON(apiLink,function(json)
+				{
+					var data= json.query.pages;
+					
+					$.each(data,function(key,value)
+						{
+							window.alert(value.title);
+						}
+					);
+				}
+			);
+			
+		}
+		
+		$(document).ready(function()
+		{
+			getResults();
+		});
+		
+	</script>
+</head>
+
+<body>
+	<h2 id="result">result</h2>
+	
+</body>
+
+</html>

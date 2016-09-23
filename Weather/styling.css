@@ -1,0 +1,28 @@
+body
+{
+	
+}
+
+#content
+{
+	display: inline-block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 400px;
+    height: 450px;
+    margin: auto;
+}
+
+#weather-icon img
+{
+	display: block;
+	margin: 0 auto;
+}
+
+#temperature-unit
+{
+	color: blue;
+}
