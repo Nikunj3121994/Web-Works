@@ -1,0 +1,67 @@
+<html>
+	<head>
+		<title> Calculator </title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+		integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		<link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="styling.css">
+		
+		
+		<!--SCRIPTS AREA-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="script.js"></script>
+	</head>
+	
+	<body class= "container-fluid">
+		<!-- calculator body-->
+		<div class="row" id="body">
+			<div class="col-md-12">
+				<!-- where typed text goes-->
+				<div class="row" id="display-area">
+					<div class="row" id="calculation-area">
+						<p class="text-right" id= "calculation">0</p>
+					</div>
+					<!-- where result shows-->
+					<div class="row" id="result-area">
+						<p class="text-right" id="result"> </p>
+					</div>
+				</div>
+				<!-- where buttons are clicked-->
+				<div class="row" id="buttons-area">
+					<div class="col-md-12">
+						<div class="row" id="row-1">
+							<div class="col-md-3 text-center"> <button id="9">9</button></div>
+							<div class="col-md-3 text-center"> <button id="8">8</button></div>
+							<div class="col-md-3 text-center"> <button id="7">7</button></div>
+							<div class="col-md-3 text-center"> <button id="plus">+</button></div>
+						</div>
+						<div class="row" id="row-2">
+							<div class="col-md-3 text-center"> <button id="6">6</button></div>
+							<div class="col-md-3 text-center"> <button id="5">5</button></div>
+							<div class="col-md-3 text-center"> <button id="4">4</button></div>
+							<div class="col-md-3 text-center"> <button id="minus">-</button></div>	
+						</div>
+						<div class="row" id="row-3">
+							<div class="col-md-3 text-center"> <button id="3">3</button></div>
+							<div class="col-md-3 text-center"> <button id="2">2</button></div>
+							<div class="col-md-3 text-center"> <button id="1">1</button></div>
+							<div class="col-md-3 text-center"> <button id="multiply">*</button></div>
+						</div>
+						<div class="row" id="row-4">
+							<div class="col-md-3 text-center"> <button id="dot">.</button></div>
+							<div class="col-md-3 text-center"> <button id="0">0</button></div>
+							<div class="col-md-3 text-center"> <button id="equals">=</button></div>
+							<div class="col-md-3 text-center"> <button id="divide">&divide;</button></div>
+						</div>
+						<div class="row" id="row-5">
+							<div class="col-md-3 text-center"></div>
+							<div class="col-md-3 text-center"> <button id="clear">CE</button></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
