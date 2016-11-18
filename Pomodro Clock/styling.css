@@ -1,0 +1,71 @@
+#title-area
+{
+	
+}
+
+#clock-area
+{
+	display: inline-block;
+    position: fixed;
+	top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	border-style: solid;
+	border-color: black;
+	border-radius: 20px;
+	margin: auto;
+	width: 400px;
+    height: 220px;
+	padding : 10px 10px 10px 10px;
+}
+
+#upper
+{
+	border-style: solid;
+	width: 360px;
+    height: 110px;
+	margin-left: 7px;
+	margin-bottom :2px;
+	padding: auto;
+	
+	font-size: 75px;
+	font-family: 'Orbitron', sans-serif;
+}
+
+#lower
+{
+	border-style: solid;
+	width: 360px;
+    height: 80px;
+	margin-left: 7px;
+	
+}
+
+#time-area
+{
+	border-style:solid;
+	margin-right: 10px;
+}
+
+#time-control
+{
+	border-style:solid;
+}
+
+#timer-text, #break-text, #break-time
+{
+	font-family: 'Comic sans MS';
+	font-size: 15px;
+}
+
+#header
+{
+	font-family: 'Comic sans MS';
+}
+
+button
+{
+	background-color: white;
+	border: none;
+}
