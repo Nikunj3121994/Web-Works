@@ -1,0 +1,86 @@
+#tokenSelection
+{
+	display: inline-block;
+    position: fixed;
+	top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	border-style: solid;
+	border-color: black;
+	border-radius: 20px;
+	margin: auto;
+	height: 250px;
+	width: 500px;
+	background-color: black;
+	color: white;
+	font-family: 'Permanent Marker', cursive;
+	font-size: 50px;
+}
+
+button
+{
+	background-color: black;
+	border-style: none;
+}
+
+button:hover
+{
+	border-color: white;
+	border-bottom-style: dotted;
+}
+
+#play-area
+{
+	display: none;
+    position: fixed;
+	top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	border-style: solid;
+	border-color: black;
+	border-radius: 20px;
+	margin: auto;
+	height: 375px;
+	width: 375px;
+	background-color: black;
+	color: white;
+	font-family: 'Permanent Marker', cursive;
+	font-size: 50px;
+}
+
+#stats-area
+{
+	font-size: 25px;
+}
+
+#board
+{
+	/*border-style: solid;*/
+	border-color: white;
+	height: 300px;
+	width: 330px;
+	margin-left: 20px;
+	padding-top: 15px;
+	text-align: center;
+	font-size: 70px;
+	cursor: default;
+}
+
+.game-column
+{
+	border-right-style: solid;
+	border-color: white;
+	height: 270px;
+}
+
+.game-row
+{
+	border-bottom-style: solid;
+	border-color: white;
+	height: 90px;
+	
+}
+
+
